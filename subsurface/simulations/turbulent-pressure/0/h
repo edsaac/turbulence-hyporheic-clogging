@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      h;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 0 0 0 0 0];
+
+internalField   uniform 0.1;
+
+boundaryField
+{
+    front
+    {
+        type            empty;
+    }
+
+    back
+    {
+        type            empty;
+    }
+
+    right
+    {
+  	type		cyclicAMI;
+    }
+
+    left
+    {
+  	type		cyclicAMI;
+    }
+
+    top
+    {
+        type            codedFixedValue;
+        value           uniform 0;
+        redirectType    sineWaves;
+
+        code
+        #{           
+          
+            // Call geometry
+            const fvPatch& boundaryPatch = patch(); 
+            // Initialize field
+            const vectorField& Cf = boundaryPatch.Cf(); 
+            scalarField& field = *this; 
+
+            // Call time
+            scalar t = this->db().time().value();
+            scalar X = 0;
+
+            forAll(Cf, faceI)
+            {
+                X = Cf[faceI].x();
+                // head = p_rho*toCentimeters/g
+                field[faceI] = signalBuild(X,t);
+                field[faceI] /= 9.81;
+
+            }
+
+        #};
+        
+        codeOptions
+        #{
+
+            -I$(LIB_SRC)/finiteVolume/lnInclude \
+            -I$(LIB_SRC)/meshTools/lnInclude
+
+        #};
+
+        codeInclude
+        #{
+            #include "fvCFD.H"
+            #include <iostream>
+            #include <math.h>
+            #include "calc_signal.H"
+
+        #};
+    
+    }
+
+    bottom
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //
