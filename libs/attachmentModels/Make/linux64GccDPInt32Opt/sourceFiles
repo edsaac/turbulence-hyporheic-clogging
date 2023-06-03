@@ -1,0 +1,6 @@
+SOURCE = \
+attachmentModel/attachmentModel.C \
+attachmentModel/attachmentModelNew.C \
+colloidFiltrationTheory/colloidFiltrationTheory.C \
+constantRate/constantRate.C \
+rittmannShearPower/rittmannShearPower.C 

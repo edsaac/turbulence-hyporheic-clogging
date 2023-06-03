@@ -1,0 +1,5 @@
+SOURCE = \
+cloggingModel/cloggingModel.C \
+cloggingModel/cloggingModelNew.C \
+powerLaw/powerLaw.C \
+kozenyCarman/kozenyCarman.C 
