@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*Dict": "OpenFOAM",
+        "*Properties": "OpenFOAM",
+        "fvSchemes": "OpenFOAM",
+        "fvSolution": "OpenFOAM",
+        "**/0*/*": "OpenFOAM",
+        "**/constant/**": "OpenFOAM",
+        "bioclogging.C": "cpp"
+    }
+}
