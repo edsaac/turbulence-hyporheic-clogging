@@ -6,6 +6,6 @@
         "fvSolution": "OpenFOAM",
         "**/0*/*": "OpenFOAM",
         "**/constant/**": "OpenFOAM",
-        "bioclogging.C": "cpp"
+        "cloggingFoam.C": "cpp"
     }
 }
