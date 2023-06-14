@@ -1,5 +1,7 @@
 # turbulence-hyporheic-clogging
 
+[![DOI](https://zenodo.org/badge/639960484.svg)](https://zenodo.org/badge/latestdoi/639960484)
+
 ## Installation
 
 ### Requirements:
